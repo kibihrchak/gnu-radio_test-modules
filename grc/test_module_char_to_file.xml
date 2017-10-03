@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<block>
+  <name>char_to_file</name>
+  <key>test_module_char_to_file</key>
+  <category>[test_module]</category>
+  <import>import test_module</import>
+  <make>test_module.char_to_file($output_filename, $debug_filename)</make>
+  <param>
+    <name>Output filename</name>
+    <key>output_filename</key>
+    <type>string</type>
+  </param>
+  <param>
+    <name>Debug filename</name>
+    <key>debug_filename</key>
+    <type>string</type>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+</block>

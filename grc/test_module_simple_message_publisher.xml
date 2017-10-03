@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<block>
+  <name>simple_message_publisher</name>
+  <key>test_module_simple_message_publisher</key>
+  <category>[test_module]</category>
+  <import>import test_module</import>
+  <make>test_module.simple_message_publisher($divisor)</make>
+  <param>
+    <name>Divisor</name>
+    <key>divisor</key>
+    <type>int</type>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>message</type>
+  </source>
+  <source>
+    <name>out_int</name>
+    <type>message</type>
+  </source>
+</block>
