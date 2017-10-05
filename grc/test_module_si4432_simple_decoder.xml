@@ -4,35 +4,33 @@
   <key>test_module_si4432_simple_decoder</key>
   <category>[test_module]</category>
   <import>import test_module</import>
-  <make>test_module.si4432_simple_decoder()</make>
-  <!-- Make one 'param' node for every Parameter you want settable from the GUI.
-       Sub-nodes:
-       * name
-       * key (makes the value accessible as $keyname, e.g. in the make node)
-       * type -->
+  <make>test_module.si4432_simple_decoder($preamble_len_units, $sync_word, $header_len, $output_filename)</make>
   <param>
-    <name>...</name>
-    <key>...</key>
-    <type>...</type>
+    <name>Preamble length</name>
+    <key>preamble_len_units</key>
+    <type>int</type>
   </param>
-
-  <!-- Make one 'sink' node per input. Sub-nodes:
-       * name (an identifier for the GUI)
-       * type
-       * vlen
-       * optional (set to 1 for optional inputs) -->
+  <param>
+    <name>Sync word</name>
+    <key>sync_word</key>
+    <type>int_vector</type>
+  </param>
+  <param>
+    <name>Header length</name>
+    <key>header_len</key>
+    <type>int</type>
+  </param>
+  <param>
+    <name>Output filename</name>
+    <key>output_filename</key>
+    <type>string</type>
+  </param>
   <sink>
     <name>in</name>
-    <type><!-- e.g. int, float, complex, byte, short, xxx_vector, ...--></type>
+    <type>byte</type>
   </sink>
-
-  <!-- Make one 'source' node per output. Sub-nodes:
-       * name (an identifier for the GUI)
-       * type
-       * vlen
-       * optional (set to 1 for optional inputs) -->
   <source>
     <name>out</name>
-    <type><!-- e.g. int, float, complex, byte, short, xxx_vector, ...--></type>
+    <type>message</type>
   </source>
 </block>

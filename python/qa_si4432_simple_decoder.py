@@ -35,7 +35,11 @@ class qa_si4432_simple_decoder (gr_unittest.TestCase):
         import tempfile
         import numpy
 
-        SRC_FILENAME = 'in.hex'
+        SRC_FILENAME = 'in.bin'
+        PREAMBLE_LEN_UNITS = 4
+        SYNC_WORD = (0x2d, 0xd4)
+        HEADER_LEN = 4
+
         output_file = tempfile.NamedTemporaryFile(mode='r')
 
 
@@ -43,7 +47,8 @@ class qa_si4432_simple_decoder (gr_unittest.TestCase):
         #   Create, connect blocks
 
         src = blocks.file_source(gr.sizeof_char*1, SRC_FILENAME, False)
-        dec = si4432_simple_decoder(PREAMBLE_LEN, SYNC_WORD, HEADER,
+        dec = si4432_simple_decoder(
+                PREAMBLE_LEN_UNITS, SYNC_WORD, HEADER_LEN,
                 output_file.name)
         dst = blocks.message_debug()
 
