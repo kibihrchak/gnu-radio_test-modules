@@ -306,12 +306,17 @@ class si4432_simple_decoder(gr.sync_block):
                 self)
         self.__output_filename = output_filename
 
+        if self.__output_filename:
+            self.__output_file = open(self.__output_filename, 'w')
+        else:
+            self.__output_file = None
+
     def packet_received(self, packet):
+        data_string = ''.join(chr(c) for c in packet["data"])
         logging.debug("Packet received")
         logging.debug("Header: {}".format(packet["header"]))
         logging.debug("Data: {}".format(packet["data"]))
-        logging.debug("Data (string): '{}'".format(
-            ''.join(chr(c) for c in packet["data"])))
+        logging.debug("Data (string): '{}'".format(data_string))
         logging.debug("CRC: {}".format(packet["crc"]))
 
 
@@ -322,6 +327,14 @@ class si4432_simple_decoder(gr.sync_block):
 
         self.message_port_pub(pmt.intern('out'),
                 pmt.cons(pmt.PMT_NIL, send_pmt))
+
+        if self.__output_file:
+            self.__output_file.write(data_string)
+            self.__output_file.flush()
+
+    def __del__(self):
+        if self.__output_file:
+            self.__output_file.close()
 
     def work(self, input_items, output_items):
         in0 = input_items[0]
